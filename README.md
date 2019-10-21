@@ -2,9 +2,8 @@
 
 **Study list**
   * String / Array
-    - [Stack](https://github.com/YeoKyuLi/Data-Structure/blob/master/String%20Array/stack.md)
-      
-  - [Queue](https://github.com/YeoKyuLi/Data-Structure/blob/master/String%20Array/queue.md)
+    - [Stack](https://github.com/YeoKyuLi/Data-Structure/blob/master/String%20Array/stack.md)  
+    - [Queue](https://github.com/YeoKyuLi/Data-Structure/blob/master/String%20Array/queue.md)
     
   * Sorting and Searching
 
