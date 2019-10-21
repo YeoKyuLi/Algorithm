@@ -1,6 +1,6 @@
 # Data-Structure 
 
-## Study list
+*Study list*
   * String / Array
 
   * Sorting and Searching
@@ -9,9 +9,7 @@
 
   * Graph
 
-  * Linked List 
-
-    []: https://github.com/YeoKyuLi/Data-Structure/blob/master/Linked_List/linked_list.md
+  * [Linked List]: https://github.com/YeoKyuLi/Data-Structure/blob/master/Linked_List/linked_list.md
 
   * Hash
 
