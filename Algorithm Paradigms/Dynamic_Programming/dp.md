@@ -55,7 +55,7 @@
 
 
 
-#### Overlapping Subproblems Property
+#### [Overlapping Subproblems Property](https://www.geeksforgeeks.org/dynamic-programming-set-1/)
 
 ​		Like Divide and Conquer, Dynamic Programming combines solutions to sub-problems. In dynamic programming, computed solutions to subproblems are stored in a table so that these don't have to be recomputed.
 
@@ -73,11 +73,71 @@ fib(1) fib(0)
 
 ​	a. Memoization (Top Down)
 
+​	
+
+```c++
+#include<iostream>
+#defube NIL -1
+#define MAX 100
+using namepsace std;
+
+int lookup[MAX];
+
+void init()
+{
+  int i;
+  for(i = 0; i < MAX; i++)
+    lookup[i] = NIL;
+}
+
+int fib(int n)
+{
+  if(lookup[n] == NIL)
+  {
+    if(n <= 1)
+      lookup[n] = n;
+    else
+      lookup[n] = fib(n - 1) + fib(n -2);
+  }
+  return lookup[n];
+}
+
+int main()
+{
+  int n = 40;
+  init();
+  cout << fib(n);
+  return 0;
+}
+```
+
 ​	b. Tabulation (Bottom Up)
 
 
 
-####Optimal Substructure Property
+```c++
+#include<iostream>
+int fib(int n)
+{
+  int f[n+1];
+  int i;
+  f[0] = 0; f[1] = 1;
+  for(i = 2; i<= n; i++)
+    f[i] = f[i-1] + f[i-2];
+  
+  return f[n];
+}
+int main()
+{
+  int n = 9;
+  cout << fib(n);
+  return 0;
+}
+```
+
+
+
+####[Optimal Substructure Property](https://www.geeksforgeeks.org/dynamic-programming-set-2-optimal-substructure-property/)
 
 
 
