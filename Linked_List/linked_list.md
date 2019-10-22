@@ -1,6 +1,6 @@
 # Linked List
 
-I referenced the (greeksforgeeks)[https://www.geeksforgeeks.org/data-structures/linked-list/]
+I referenced the [greeksforgeeks](https://www.geeksforgeeks.org/data-structures/linked-list/)
 
 This Linked List is based on Singly Linked List.
 
