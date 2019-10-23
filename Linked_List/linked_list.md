@@ -222,4 +222,371 @@ int main()
     * [QuickSort on Doubly Linked List](https://www.geeksforgeeks.org/quicksort-for-linked-list/)
     * [Swap Kth node from beginning with Kth node from end in a Linked List](https://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/)
     * [Merge Sort for Doubly Linked List](https://www.geeksforgeeks.org/merge-sort-for-doubly-linked-list/)
-    * 
+
+
+
+* Add Two Numbers
+
+  You are given two **non-empty** linked lists representing two non-negative integers. The digits are stored in **reverse order** and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+  ```c++
+  /**
+   * Definition for singly-linked list.
+   * struct ListNode {
+   *     int val;
+   *     ListNode *next;
+   *     ListNode(int x) : val(x), next(NULL) {}
+   * };
+   */
+  #include <iostream>
+  #include <cstdlib>
+  class Solution {
+  public:
+      ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+          ListNode* dummy = new ListNode(0);
+          ListNode* node = dummy;
+          int sum,c=0;
+          
+          while(l1||l2){
+              int x = (l1 != NULL) ? l1->val : 0;
+              int y = (l2 != NULL) ? l2->val : 0;
+              sum = x + y + c;
+              c = 0;
+              if(sum>=10)
+                  c = 1;
+              node->next = new ListNode(sum%10);;
+              node = node->next;
+              if(l1 != NULL) l1 = l1->next;
+              if(l2 != NULL) l2 = l2->next;
+          }
+          if(c==1){
+              node->next = new ListNode(1);;
+              node = node->next;
+          }
+          node = dummy->next;
+          delete dummy;
+          return node;
+      
+      }
+  };
+  ```
+
+  
+
+* Remove Nth Node From End of List
+
+  Given a linked list, remove the *n*-th node from the end of list and return its head.
+
+  ```c++
+  /**
+   * Definition for singly-linked list.
+   * struct ListNode {
+   *     int val;
+   *     ListNode *next;
+   *     ListNode(int x) : val(x), next(NULL) {}
+   * };
+   */
+  class Solution {
+  public:
+      ListNode* removeNthFromEnd(ListNode* head, int n) {
+          ListNode* tmp = head;
+          int cnt=0;
+          while(tmp != nullptr){
+              cnt++;
+              tmp = tmp->next;
+          }
+          if(cnt == n)
+              return head->next;
+          
+          int remove = cnt - n;
+          tmp = head;
+          while(--remove){
+              tmp = tmp->next;
+          }
+          tmp->next = tmp->next->next;        
+          return head;
+      }
+  };
+  ```
+
+  
+
+* Merge Two Sorted Lists
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode* result = new ListNode(0);
+        
+        
+        
+        while(l1)
+        {
+            result->next = l1;
+            l1 = l1->next;
+            result = result->next;
+            // if(l1->val < l2->val){
+            //     result->next = l1;
+            //     l1 = l1->next;
+            // }
+            // else
+            // {               
+            //     ListNode* tmp= new ListNode(l2->val);
+            //     result->next = tmp;
+            //     result = tmp;
+            //     l2 = l2->next;
+            // }
+            
+        }
+        
+        return result;
+    }
+};
+```
+
+
+
+* Linked List Cycle
+
+  Given a linked list, determine if it has a cycle in it.
+
+  To represent a cycle in the given linked list, we use an integer `pos` which represents the position (0-indexed) in the linked list where tail connects to. If `pos` is `-1`, then there is no cycle in the linked list.
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+#include <iostream>
+using namespace std;
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode *slow = new ListNode(0);
+        ListNode *fast = new ListNode(0);
+        slow = head; fast = head;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            // cout << slow->val << " " << fast->val << endl;
+            if(slow == fast)
+                return true;
+        }      
+        
+        return false;
+    }
+};
+```
+
+
+
+* Intersection of Two Linked Lists
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* a = headA;
+        ListNode* b = headB;
+        
+        if(headA == NULL or headB == NULL)
+            return NULL;
+        
+        while(a != b){
+            a = (a != NULL) ? a->next : headB;
+            b = (b != NULL) ? b->next : headA;
+        }
+        return a;
+    }
+};
+```
+
+
+
+* Reverse Linked List **
+
+  **Example:**
+
+  ```
+  Input: 1->2->3->4->5->NULL
+  Output: 5->4->3->2->1->NULL
+  ```
+
+  ```c++
+  /**
+   * Definition for singly-linked list.
+   * struct ListNode {
+   *     int val;
+   *     ListNode *next;
+   *     ListNode(int x) : val(x), next(NULL) {}
+   * };
+   */
+  #include <iostream>
+  using namespace std;
+  class Solution {
+  public:
+      ListNode* reverseList(ListNode* head) {
+          ListNode* newNode = NULL;
+          ListNode* cur = head;
+          
+          while(cur != NULL){
+              ListNode* temp = cur->next;
+              cur->next = newNode;
+              newNode = cur;  
+              cur = temp;
+          }
+          
+          return newNode;
+      }
+  };
+  ```
+
+  
+
+* Palindrome Linked List
+
+  Given a singly linked list, determine if it is a palindrome.
+
+  **Example 2:**
+
+  ```
+  Input: 1->2->2->1
+  Output: true
+  ```
+
+* ```c++
+  /**
+   * Definition for singly-linked list.
+   * struct ListNode {
+   *     int val;
+   *     ListNode *next;
+   *     ListNode(int x) : val(x), next(NULL) {}
+   * };
+   */
+  #include <stack>
+  using namespace std;
+  class Solution {
+  public:
+      bool isPalindrome(ListNode* head) {
+          ListNode* h = head;
+          stack<int> s;
+          while(h){
+              s.push(h->val);
+              h = h->next;
+          }
+          while(head){
+              if(head->val != s.top())
+                  return false;
+              s.pop();
+              head = head->next;
+          }
+          return true;
+      }
+  };
+  ```
+
+  
+
+* Delete Node in a Linked List
+
+* ```c++
+  /**
+   * Definition for singly-linked list.
+   * struct ListNode {
+   *     int val;
+   *     ListNode *next;
+   *     ListNode(int x) : val(x), next(NULL) {}
+   * };
+   */
+  class Solution {
+  public:
+      void deleteNode(ListNode* node) {
+          node->val = node->next->val;
+          node->next = node->next->next;
+      }
+  };
+  ```
+
+  
+
+* Odd Even Linked List
+
+  Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.
+
+  You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.
+
+  **Example 1:**
+
+  ```
+  Input: 1->2->3->4->5->NULL
+  Output: 1->3->5->2->4->NULL
+  ```
+
+  **Example 2:**
+
+  ```
+  Input: 2->1->3->5->6->4->7->NULL
+  Output: 2->3->6->7->1->5->4->NULL
+  ```
+
+  **Note:**
+
+  - The relative order inside both the even and odd groups should remain as it was in the input.
+  - The first node is considered odd, the second node even and so on ...
+
+  ```c++
+  /**
+   * Definition for singly-linked list.
+   * struct ListNode {
+   *     int val;
+   *     ListNode *next;
+   *     ListNode(int x) : val(x), next(NULL) {}
+   * };
+   */
+  class Solution {
+  public:
+      ListNode* oddEvenList(ListNode* head) {
+          if(head == NULL)
+              return NULL;
+          ListNode* odd = head;
+          ListNode* even = head->next;
+          ListNode* evenHead = even; 
+          int cnt = 1;
+          while(even and even->next){
+              odd->next = even->next;
+              odd = odd->next;
+              even->next = odd->next;
+              even = even->next;
+          }
+          odd->next = evenHead;
+          
+          return head;
+      }
+  };
+  ```
+
+  
