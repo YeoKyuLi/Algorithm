@@ -1,59 +1,63 @@
 # Permutation
 
-1. permutation
+1. permutation - Medium
 
-Given a collection of **distinct** integers, return all possible permutations.
+   [site](https://leetcode.com/problems/permutations/)
 
-**Example:**
+   Given a collection of **distinct** integers, return all possible permutations.
 
-```
-Input: [1,2,3]
-Output:
-[
-  [1,2,3],
-  [1,3,2],
-  [2,1,3],
-  [2,3,1],
-  [3,1,2],
-  [3,2,1]
-]
-```
+   **Example:**
 
-```c++
+   ```
+   Input: [1,2,3]
+   Output:
+   [
+     [1,2,3],
+     [1,3,2],
+     [2,1,3],
+     [2,3,1],
+     [3,1,2],
+     [3,2,1]
+   ]
+   ```
 
-class Solution {
-public:
-    void premutation(vector<int>& per, int begin, vector<vector<int>>& output)
-    {
-        if(begin == per.size() ){
-            output.push_back(per);
-            return ;
-        }
-        for(int i = begin; i < per.size(); i++)
-        {
-            swap(per[begin], per[i]);
-            premutation(per, begin+1, output);
-            swap(per[begin], per[i]);          
-        }
-        
-    }
-    
-    vector<vector<int>> permute(vector<int>& nums) {   
-        vector<vector<int>> output;
+   ```c++
+   
+   class Solution {
+   public:
+       void premutation(vector<int>& per, int begin, vector<vector<int>>& output)
+       {
+           if(begin == per.size() ){
+               output.push_back(per);
+               return ;
+           }
+           for(int i = begin; i < per.size(); i++)
+           {
+               swap(per[begin], per[i]);
+               premutation(per, begin+1, output);
+               swap(per[begin], per[i]);          
+           }
+           
+       }
+       
+       vector<vector<int>> permute(vector<int>& nums) {   
+           vector<vector<int>> output;
+   
+           premutation(nums, 0,output);
+           
+           
+           return output;
+       }
+   };
+   
+   
+   ```
 
-        premutation(nums, 0,output);
-        
-        
-        return output;
-    }
-};
+   
 
+2. permutation 2 - Medium
 
-```
-
-
-
-2. permutation 2
+   [site](https://leetcode.com/problems/permutations-ii/)
 
    Given a collection of numbers that might contain duplicates, return all possible unique permutations.
 

@@ -1,54 +1,58 @@
 # Combination
 
-1. combination
+1. combinations
 
-Given two integers *n* and *k*, return all possible combinations of *k* numbers out of 1 ... *n*.
+   [site](https://leetcode.com/problems/combinations/)
 
-**Example:**
+   Given two integers *n* and *k*, return all possible combinations of *k* numbers out of 1 ... *n*.
 
-```
-Input: n = 4, k = 2
-Output:
-[
-  [2,4],
-  [3,4],
-  [2,3],
-  [1,2],
-  [1,3],
-  [1,4],
-]
-```
+   **Example:**
 
-```c++
-class Solution {
-public:
-    vector<vector<int>> combine(int n, int k) {
-        vector<vector<int>> output;
-        vector<int> tmp(k,0);
-        
-        combine(n, k, output, tmp);
-        return output;
-    }
-private:
-    void combine(int endNum, int len, vector<vector<int>>& output, vector<int>& tmp)
-    {
-        if(len == 0)
-        {
-            output.push_back(tmp);
-            return;
-        }
-        for(int i = endNum; i >= 1; i--)
-        {
-            tmp[len-1]= i;
-            combine(i - 1, len - 1, output, tmp);
-        }
-    }
-};
-```
+   ```
+   Input: n = 4, k = 2
+   Output:
+   [
+     [2,4],
+     [3,4],
+     [2,3],
+     [1,2],
+     [1,3],
+     [1,4],
+   ]
+   ```
 
+   ```c++
+   class Solution {
+   public:
+       vector<vector<int>> combine(int n, int k) {
+           vector<vector<int>> output;
+           vector<int> tmp(k,0);
+           
+           combine(n, k, output, tmp);
+           return output;
+       }
+   private:
+       void combine(int endNum, int len, vector<vector<int>>& output, vector<int>& tmp)
+       {
+           if(len == 0)
+           {
+               output.push_back(tmp);
+               return;
+           }
+           for(int i = endNum; i >= 1; i--)
+           {
+               tmp[len-1]= i;
+               combine(i - 1, len - 1, output, tmp);
+           }
+       }
+   };
+   ```
 
+   
 
 2. Combination Sum
+
+   [site](https://leetcode.com/problems/combination-sum/)
 
    Given a **set** of candidate numbers (`candidates`) **(without duplicates)** and a target number (`target`), find all unique combinations in `candidates` where the candidate numbers sums to `target`.
 
@@ -114,6 +118,8 @@ private:
 
 3. Combination Sum2
 
+   [site](https://leetcode.com/problems/combination-sum-ii/)
+
    Given a collection of candidate numbers (`candidates`) and a target number (`target`), find all unique combinations in `candidates` where the candidate numbers sums to `target`.
 
    Each number in `candidates` may only be used **once** in the combination.
@@ -174,6 +180,8 @@ private:
 
 4. Combination Sum3
 
+   [site](https://leetcode.com/problems/combination-sum-iii/)
+
    Find all possible combinations of ***k*** numbers that add up to a number ***n***, given that only numbers from 1 to 9 can be used and each combination should be a unique set of numbers.
 
    **Note:**
@@ -220,6 +228,8 @@ private:
 
 5. Combination Sum4
 
+   [site](https://leetcode.com/problems/combination-sum-iv/)
+
    Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.
 
    **Example:**
@@ -261,5 +271,183 @@ private:
 
    
 
-6. Combination 
+6. Combination - 타켓 넘버
 
+   [OriginalMD](/Users/yeokyuli/Google Drive/KyuLi/구글/Data-Structure/Algorithm Study/20200112.md)
+
+   [site][https://programmers.co.kr/learn/courses/30/lessons/43165]
+
+   ###### 문제 설명
+
+   n개의 음이 아닌 정수가 있습니다. 이 수를 적절히 더하거나 빼서 타겟 넘버를 만들려고 합니다. 예를 들어 [1, 1, 1, 1, 1]로 숫자 3을 만들려면 다음 다섯 방법을 쓸 수 있습니다.
+
+   ```
+   -1+1+1+1+1 = 3
+   +1-1+1+1+1 = 3
+   +1+1-1+1+1 = 3
+   +1+1+1-1+1 = 3
+   +1+1+1+1-1 = 3
+   ```
+
+   사용할 수 있는 숫자가 담긴 배열 numbers, 타겟 넘버 target이 매개변수로 주어질 때 숫자를 적절히 더하고 빼서 타겟 넘버를 만드는 방법의 수를 return 하도록 solution 함수를 작성해주세요.
+
+   ##### 제한사항
+
+- 주어지는 숫자의 개수는 2개 이상 20개 이하입니다.
+- 각 숫자는 1 이상 50 이하인 자연수입니다.
+- 타겟 넘버는 1 이상 1000 이하인 자연수입니다.
+
+##### 입출력 예
+
+| numbers         | target | return |
+| --------------- | ------ | ------ |
+| [1, 1, 1, 1, 1] | 3      | 5      |
+
+##### complexity: t -> O(logN), s->
+
+```c++
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+/*
+combination
+또한 패턴이 중복이 되면 안된당
+이것이 그래프 문제인가... 아 그래프로 풀려면 또 그럴순있군..?
+이건 DFS로 풀어야지 -> not DFS
+*/
+void com(int begin, vector<int>& numbers, const int& target, int tmp, int& answer)
+{
+    if(begin == numbers.size() && target == tmp)
+    {
+        answer++;
+        return;
+    }
+    // for(int i = begin; i < numbers.size() ; i++)
+    if(begin != numbers.size())
+    {
+        com(begin+1, numbers, target, tmp+numbers[begin], answer);
+        com(begin+1, numbers, target, tmp-numbers[begin], answer);
+    }
+}
+
+int solution(vector<int> numbers, int target) {
+    int answer = 0;
+    com(0, numbers, target,0, answer);
+    return answer;
+}
+```
+
+7. Letter Combinations of a Phone Number - Medium
+
+   [site](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+
+   Given a string containing digits from `2-9` inclusive, return all possible letter combinations that the number could represent.
+
+   A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+   ![img](http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png)
+
+   **Example:**
+
+   ```
+   Input: "23"
+   Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+   ```
+
+   **Note:**
+
+   Although the above answer is in lexicographical order, your answer could be in any order you want.
+
+   ```c++
+   class Solution {
+   public:
+       map<string, string> nums= {
+           {"2", "abc"},
+           {"3", "def"},
+           {"4", "ghi"},
+           {"5", "jkl"},
+           {"6", "mno"},
+           {"7", "pqrs"},
+           {"8", "tuv"},
+           {"9", "wxyz"},
+       };
+       vector<string> output;
+       void combinations(string comb, string next_digits){
+           if(next_digits.length() == 0)
+               output.push_back(comb);
+               // cout << "com : " << comb << endl;
+           else{
+               string digit = next_digits.substr(0,1);
+               string letters = nums.find(digit)->second;
+               cout << letters << endl;
+               for(int i = 0 ; i < letters.length() ; i++){
+                   char letter = letters.at(i);
+                   // if(i==0)
+                   //     letter = letters.substr(i,i+1);
+                   // else
+                   //     letter = letters.substr(i,i);
+                   cout << letter << endl;
+                   combinations(comb+letter, next_digits.substr(1));
+               }
+           }
+          
+       }
+       vector<string> letterCombinations(string digits) {
+           // show content:        
+           //숫자에 맞는 값을 Map에서 꺼낸다. 하나씩 보낸다.
+           if(digits.length() != 0)
+               combinations("", digits);
+           
+           
+           
+           // for(int i = 0 ; i < digits.size(); i++){
+               
+               // cout << nums.find(digits[i])->second << endl;
+               //해당 string을 넘겨서 combinations을 만든다.
+           
+               // combinations("",nums.find(digits[i])->second, nums.find(digits[i])->second.length());
+           // }
+           
+           
+           // for (std::map<char, string>::iterator it=nums.begin(); it!=nums.end(); ++it)
+           //     std::cout << it->first << " => " << it->second<< '\n';
+           
+           return output;
+       }
+   };
+   ```
+
+8. c
+
+   ```c++
+   
+   ```
+
+9. c
+
+   ```c++
+   
+   ```
+
+10. c
+
+    ```c++
+    
+    ```
+
+11. c
+
+    ```c++
+    
+    ```
+
+12. c
+
+    ```c++
+    
+    ```
+
+    
