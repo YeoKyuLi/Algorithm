@@ -133,3 +133,28 @@ int findSingleNum(vector<int> & v)
 }
 ```
 
+
+
+
+
+```c++
+void combination(vector<string>& res , int begin , int end, string tmp){
+	if( begin == 0 && end == 0){
+		res.push_back(tmp);
+		return;
+	}
+	if (begin > 0)
+		combination(res , begin-1 , end +1, tmp+”(“);
+	if ( end > 0)
+		combination(res , begin , end -1, tmp+”)”);
+}
+
+vector<string> makeParenthesis(int cnt)
+{
+	vector<string> res;	
+	combination(res, cnt, 1, ““);
+	return res;
+}
+
+```
+
