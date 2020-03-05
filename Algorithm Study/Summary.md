@@ -1,3 +1,33 @@
+[Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree) 
+
+
+
+[Combinations](https://leetcode.com/problems/combinations) 
+
+[Combination Sum IV](https://leetcode.com/problems/combination-sum-iv)  
+
+
+
+[Coin Change](https://leetcode.com/problems/coin-change) 
+
+[Climbing Stairs](https://leetcode.com/problems/climbing-stairs)
+
+[Decode Ways](https://leetcode.com/problems/decode-ways)
+
+[Word Break](https://leetcode.com/problems/word-break)
+
+
+
+
+
+[Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array)
+
+
+
+
+
+[Divide Two Integers](https://leetcode.com/problems/divide-two-integers) 
+
 ## Find target
 
 ```c++
@@ -134,6 +164,35 @@ int findSingleNum(vector<int> & v)
 ```
 
 
+
+### Generate Parenthesis
+
+```c++
+class Solution {
+public:
+    vector<string> result;
+    
+    void generate(string str, int left, int right, int size)
+    {
+        if(str.length() == size*2)
+            result.push_back(str);
+        
+        if(left < size)
+            generate(str+"(", left+1, right, size);
+        if(right < left)
+            generate(str+")", left, right+1, size); 
+        
+        
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        int right = 0, left = 0, size = n;
+        generate("", left, right, size);        
+        
+        return result;
+    }
+};
+```
 
 
 
