@@ -43,6 +43,8 @@
   - 지수 시간 (exponential time): 선택지가 M개라면 2^M가지
 4. 시간 복잡도의 분할 상환 분석: 각 작업에 걸리는 시간은 모두 다르지만 전체 작업에 걸리는 시간이 일정한 경우 이런 방법을 적용할 수 있다.
 
+## 이론
+1. Brute-Force: exhaustive search, recursion
 
 
 ## **Study list**
